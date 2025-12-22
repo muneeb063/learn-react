@@ -1,19 +1,9 @@
-
-# dependencies
 node_modules/
-
-# build output
-dist/
-
-# parcel cache
 .parcel-cache/
 
-# optional caches
+dist/
 .cache/
+
+# optional caches
 .DS_Store
 .env
-=======
-/node_modules
-/.parcel-cache
-dist
-/.cache
