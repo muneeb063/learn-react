@@ -1,1 +1,13 @@
-/node_modules
+# dependencies
+node_modules/
+
+# build output
+dist/
+
+# parcel cache
+.parcel-cache/
+
+# optional caches
+.cache/
+.DS_Store
+.env
