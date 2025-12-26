@@ -5,14 +5,16 @@ import ReactDOM from "react-dom/client";
 
 // rootReact.createElement => object => when rendere then it becomes HTMLElement
 
-const heading = React.createElement("h1", { id: "heading" }, "Hello World from React!");
+const title = <h1 className="head">Hello World from JSX!</h1>;
 
-console.log(heading); // this will give object
-
-const jsxHeading = <h1 id = "heading">Hello World from JSX!</h1>
-
-console.log(jsxHeading); // this will also give object
+const HeadingComponent = () => (
+  <div id="container">
+    {title}
+    <h1 className="heading">This is a Heading from Functional Component</h1>
+  </div>
+);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(heading);
+// root.render(heading);
+root.render(<HeadingComponent />); // this is how we render a functional component
