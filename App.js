@@ -5,16 +5,52 @@ import ReactDOM from "react-dom/client";
 
 // rootReact.createElement => object => when rendere then it becomes HTMLElement
 
-const title = <h1 className="head">Hello World from JSX!</h1>;
+const Header = () =>{
+    return(
+        <div className="header">
+            <div className="logo-container">
+                <img className="logo" src="https://www.logodesign.net/logo/smoking-burger-with-lettuce-3624ld.png" alt="logo" />
+            </div>
+            <div className="nav-items">
+                <ul>
+                    <li>Home</li>
+                    <li>About us</li>
+                    <li>Contact us</li>
+                    <li>Cart</li>
+                    </ul>
+            </div>
+        </div>
+    )
+}
 
-const HeadingComponent = () => (
-  <div id="container">
-    {title}
-    <h1 className="heading">This is a Heading from Functional Component</h1>
-  </div>
-);
+const RestaurantCard = () =>{
+    return(
+        <div className="res-card">
+<h3>Restaurant Name</h3>    
+        </div>
+    )
+}
+const Body =() =>{
+    return(
+        <div className="body">
+            <div className="search">search</div>
+            <div className="res-container">
+            <RestaurantCard />
+            </div>
+        </div>         
+    )
+}
+
+const AppLayout = () => {
+    return(
+        <div className="App">
+        <Header />
+        <Body />
+        </div>
+    )
+}
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 // root.render(heading);
-root.render(<HeadingComponent />); // this is how we render a functional component
+root.render(<AppLayout />); // this is how we render a functional component
