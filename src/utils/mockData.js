@@ -13,7 +13,7 @@ const restaurantList = [
     resName: "Pizza Hut",
     cuisine: "Italian",
     img: "Sp5.jpg",
-    rating: 4.5,
+    rating: 3.5,
     time: "40 minutes",
     price: "₹400 for two",
   },
