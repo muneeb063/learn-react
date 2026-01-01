@@ -1,8 +1,9 @@
 import RestaurantCard from "./RestaurantCard";
 import restaurantList from "../utils/mockData";
+import { useState } from "react";
 
 const Body = () => {
-  let listOfRestaurants = [
+  const [listOfRestaurants, setListOfRestaurants] = useState([
     {
       id: 1,
       name: "Domino's Pizza",
@@ -21,7 +22,7 @@ const Body = () => {
       time: "30 minutes",
       price: "₹500 for two",
     },
-  ];
+  ]);
 
   return (
     <div className="body">
@@ -31,13 +32,24 @@ const Body = () => {
           onClick={() => {
             console.log("Button Clicked");
 
-            listOfRestaurants = listOfRestaurants.filter(
+            const filteredList = listOfRestaurants.filter(
               (restaurant) => restaurant.rating > 4
             );
-            console.log(listOfRestaurants);
+            setListOfRestaurants(filteredList);
+            console.log(filteredList);
           }}
         >
           Top Rated Restaurants
+        </button>
+        <button
+          className="filter-btn"
+          onClick={() => {
+            console.log("Button Clicked");
+            setListOfRestaurants(listOfRestaurants);
+            console.log(listOfRestaurants);
+          }}
+        >
+          All Restaurants
         </button>
       </div>
       <div className="res-container">
