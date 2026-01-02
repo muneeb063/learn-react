@@ -1,28 +1,13 @@
 import RestaurantCard from "./RestaurantCard";
 import restaurantList from "../utils/mockData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState([
-    {
-      id: 1,
-      name: "Domino's Pizza",
-      cuisine: "Italian, Fast Food",
-      img: "Sp2.jpg",
-      rating: 4.2,
-      time: "30 minutes",
-      price: "₹500 for two",
-    },
-    {
-      id: 2,
-      name: "King's Pizza",
-      cuisine: "Italian, Fast Food",
-      img: "Sp3.jpg",
-      rating: 3.2,
-      time: "30 minutes",
-      price: "₹500 for two",
-    },
-  ]);
+  const [listOfRestaurants, setListOfRestaurants] = useState(restaurantList);
+
+  useEffect(() => {
+    console.log("Component Mounted UseEffect Function");
+  }, []);
 
   return (
     <div className="body">
@@ -45,8 +30,8 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             console.log("Button Clicked");
-            setListOfRestaurants(listOfRestaurants);
-            console.log(listOfRestaurants);
+            setListOfRestaurants(restaurantList);
+            console.log(restaurantList);
           }}
         >
           All Restaurants
