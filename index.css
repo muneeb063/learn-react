@@ -33,9 +33,25 @@
   justify-content: left;
 }
 
+.filter {
+  display: flex;
+}
+
 .filter-btn {
   margin: 10px;
   cursor: pointer;
+}
+
+.shimmer-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shimmer-card {
+  background-color: #f0f0f0;
+  height: 400px;
+  width: 200px;
+  margin: 20px;
 }
 
 .res-card {
@@ -51,4 +67,9 @@
 
 .res-logo {
   width: 100%;
+}
+
+.login-btn {
+  padding: 0px 20px;
+  cursor: pointer;
 }
