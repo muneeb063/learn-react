@@ -2,9 +2,10 @@ import RestaurantCard from "./RestaurantCard";
 import restaurantList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "../Shimmer";
+import { BASE_API_URL } from "../utils/constants";
 
 const Body = () => {
-  const [listOfRestaurants, setListOfRestaurants] = useState(restaurantList);
+  const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
 
   const [searchText, setSearchText] = useState("");
@@ -16,24 +17,29 @@ const Body = () => {
   }, []);
 
   const FetchData = async () => {
-    const data = await fetch(
-      "https://gist.githubusercontent.com/omar94hamza/c96f0be02bffa48056e12893be8eda36/raw/66e5f26a6013be9f1627310e676619ae4c87ce75/restaurants.json"
-    );
+    try {
+      const data = await fetch(
+        `https://corsproxy.io/?${BASE_API_URL}listRestaurants`
+      );
 
-    const json = await data.json();
-    console.log(json);
-    setListOfRestaurants(json);
-    setFilteredList(json);
+      const json = await data.json();
+      console.log(json);
+      const restaurants =
+        json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants ?? [];
+      setListOfRestaurants(restaurants);
+      setFilteredList(restaurants);
+    } catch (error) {
+      console.error("Fetch failed:", err);
+      setListOfRestaurants([]);
+      setFilteredList([]);
+    }
   };
-
-  //COnditional Rendering
-  if (listOfRestaurants.length === 0) {
+  if (!filteredList) return <Shimmer />; // extra safety (shouldn't happen with fixes above)
+  if (filteredList.length === 0 && listOfRestaurants.length === 0)
     return <Shimmer />;
-  }
 
-  return listOfRestaurants.length === 0 ? (
-    <Shimmer />
-  ) : (
+  return (
     <div className="body">
       <div className="filter">
         <div className="search">
@@ -90,7 +96,7 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredList.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} resData={restaurant} />
+          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
         ))}
       </div>
     </div>
