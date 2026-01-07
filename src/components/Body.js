@@ -13,17 +13,17 @@ const Body = () => {
   let actualData = [];
 
   useEffect(() => {
-    FetchData();
+    fetchData();
   }, []);
 
-  const FetchData = async () => {
+  const fetchData = async () => {
     try {
       const data = await fetch(
         `https://corsproxy.io/?${BASE_API_URL}listRestaurants`
       );
 
       const json = await data.json();
-      console.log(json);
+      console.log("Body",json);
       const restaurants =
         json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants ?? [];
