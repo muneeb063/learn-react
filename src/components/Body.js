@@ -1,16 +1,14 @@
 import RestaurantCard from "./RestaurantCard";
-import restaurantList from "../utils/mockData";
 import { useEffect, useState } from "react";
 import Shimmer from "../Shimmer";
 import { BASE_API_URL } from "../utils/constants";
+import { Link } from "react-router";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
 
   const [searchText, setSearchText] = useState("");
-
-  let actualData = [];
 
   useEffect(() => {
     fetchData();
@@ -86,9 +84,7 @@ const Body = () => {
           className="filter-btn"
           onClick={() => {
             console.log("Button Clicked");
-            //setListOfRestaurants(restaurantList);
-            FetchData();
-            // console.log(restaurantList);
+            fetchData();
           }}
         >
           All Restaurants
@@ -96,7 +92,9 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filteredList.map((restaurant) => (
-          <RestaurantCard key={restaurant?.info?.id} resData={restaurant} />
+          <Link to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
+            <RestaurantCard resData={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

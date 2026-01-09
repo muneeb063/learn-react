@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { BASE_API_URL } from "../utils/constants";
 import Shimmer from "../Shimmer";
+import { useParams } from "react-router";
 
 const RestaurantMenu = () => {
 
 const [restInfo, setRestInfo] = useState(null);
+
+const {id } = useParams();
+console.log("id: ", id );
 
 useEffect(() =>{
 fetchMenu();
@@ -12,7 +16,7 @@ fetchMenu();
 
 const fetchMenu = async () =>{
  const data = await fetch(
-        `https://corsproxy.io/?${BASE_API_URL}listRestaurants`
+        `https://corsproxy.io/?${BASE_API_URL}listRestaurantMenu/${id }`
       );
 
     const json = await data.json();
@@ -20,8 +24,7 @@ const fetchMenu = async () =>{
     setRestInfo(json);
 }
 
-const info = restInfo?.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
-          ?.restaurants[0]?.info;
+const info = restInfo?.data.cards[2]?.card?.card?.info;
 
 if (!info) return <Shimmer />;
 
