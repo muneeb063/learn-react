@@ -5,9 +5,7 @@ import { Link } from "react-router";
 export const Header = () => {
   const [btnName, setBtnName] = useState("Login");
 
-  useEffect(() => {
-    console.log("Header Mounted");
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className="header">
@@ -16,9 +14,15 @@ export const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About us</Link></li>
-          <li><Link to="/contact">Contact us</Link></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact us</Link>
+          </li>
           <li>Cart</li>
           <button
             className="login-btn"

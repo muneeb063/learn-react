@@ -3,6 +3,10 @@ import User from "./User";
 import UserClass from "./UserClass";
 
 class About extends React.Component {
+  componentDidMount() {
+    console.log("Parent: About Class Component Mounted");
+  }
+
   render() {
     return (
       <div>
