@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Shimmer from "../Shimmer";
 import { BASE_API_URL } from "../utils/constants";
 import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -33,9 +34,18 @@ const Body = () => {
       setFilteredList([]);
     }
   };
+  
+  const isOnline = useOnlineStatus();
+  if (!isOnline) {
+    return (
+      <h1>🔴 You are offline! Please check your internet connection.</h1>
+    );
+  }
+
   if (!filteredList) return <Shimmer />; // extra safety (shouldn't happen with fixes above)
   if (filteredList.length === 0 && listOfRestaurants.length === 0)
     return <Shimmer />;
+
 
   return (
     <div className="body">
