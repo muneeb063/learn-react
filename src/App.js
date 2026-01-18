@@ -1,4 +1,5 @@
 // {} this is used to give attributes to the class e.g, {id: "heading", }
+import React, {lazy, Suspense} from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,7 +8,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
-import Grocery from "./components/Grocery";
+// import Grocery from "./components/Grocery";
 
 // Code Splitting in React
 //Chunking
@@ -16,6 +17,10 @@ import Grocery from "./components/Grocery";
 //Lazy Loading
 //On Demand Loading
 //Dynamic Import
+
+const Grocery = lazy (() => {
+  import("./components/Grocery");
+})
 
 // rootReact.createElement => object => when rendere then it becomes HTMLElement
 
@@ -36,7 +41,7 @@ const appRouter = createBrowserRouter([
       { path: "/", element: <Body /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/grocery", element: <Grocery /> },
+      { path: "/grocery", element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense> },
       { path: "/restaurants/:id", element: <RestaurantMenu /> },
     ],
     errorElement: <Error />,
