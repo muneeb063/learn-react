@@ -18,9 +18,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 //On Demand Loading
 //Dynamic Import
 
-const Grocery = lazy (() => {
-  import("./components/Grocery");
-})
+const Grocery = lazy (() => import("./components/Grocery"));
 
 // rootReact.createElement => object => when rendere then it becomes HTMLElement
 

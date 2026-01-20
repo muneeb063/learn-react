@@ -22,10 +22,12 @@ const Body = () => {
       );
 
       const json = await data.json();
-      console.log("Body",json);
+      console.log("Body - ",json);
       const restaurants =
         json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants ?? [];
+                console.log("restaurants - ",restaurants);
+
       setListOfRestaurants(restaurants);
       setFilteredList(restaurants);
     } catch (error) {
@@ -49,22 +51,22 @@ const Body = () => {
 
   return (
     <div className="body">
-      <div className="filter">
-        <div className="search">
+      <div className="filter flex">
+        <div className="search m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border-solid border border-black"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className="px-4 py-2 bg-green-100 m-4 rounded-lg cursor-pointer"
             onClick={() => {
               const filteredRestaurants = listOfRestaurants.filter(
                 (restaurant) =>
-                  restaurant.title
+                  restaurant.info.name
                     .toLowerCase()
                     .includes(searchText.toLowerCase())
               );
@@ -76,31 +78,34 @@ const Body = () => {
             Search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            console.log("Button Clicked");
 
+        <div className="m-4 p-4 flex items-center">
+        <button
+          className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
+          onClick={() => {
             const filteredList = listOfRestaurants.filter(
-              (restaurant) => restaurant.rating > 4
+              (restaurant) => restaurant.info.avgRating > 4.5
             );
-            setListOfRestaurants(filteredList);
+            setFilteredList(filteredList);
             console.log(filteredList);
           }}
         >
           Top Rated Restaurants
         </button>
-        <button
-          className="filter-btn"
+        </div>
+        <div  className="m-4 p-4 flex items-center">
+<button
+          className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
           onClick={() => {
-            console.log("Button Clicked");
             fetchData();
           }}
         >
           All Restaurants
         </button>
+        </div>
+        
       </div>
-      <div className="res-container">
+      <div className="flex flex-wrap justify-left">
         {filteredList.map((restaurant) => (
           <Link to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
             <RestaurantCard resData={restaurant} />

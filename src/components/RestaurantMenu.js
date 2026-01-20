@@ -16,15 +16,15 @@ const RestaurantMenu = () => {
   return restInfo === null ? (
     <Shimmer />
   ) : (
-    <div className="menu">
-      <h1>{name}</h1>
+    <div className=" m-4 p-4 w-[250] bg-gray-100 hover:bg-gray-200 rounded-lg">
+      <h1 className="font-bold text-lg">{name}</h1>
       <p>
         {cuisines.join(", ")} - {costForTwo}
       </p>
 
-      <h2>Menu</h2>
-      <ul>
-        <li>Pizza</li>
+      <h2 className="font-bold text-md">Menu</h2>
+      <ul className="list-disc pl-5">
+        <li> Pizza</li>
         <li>Burger</li>
         <li>Pasta</li>
         <li>French Fries</li>
