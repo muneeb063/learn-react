@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "../Shimmer";
 import { BASE_API_URL } from "../utils/constants";
@@ -11,6 +11,8 @@ const Body = () => {
 
   const [searchText, setSearchText] = useState("");
 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -18,15 +20,15 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(
-        `https://corsproxy.io/?${BASE_API_URL}listRestaurants`
+        `https://corsproxy.io/?${BASE_API_URL}listRestaurants`,
       );
 
       const json = await data.json();
-      console.log("Body - ",json);
+      console.log("Body - ", json);
       const restaurants =
         json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants ?? [];
-                console.log("restaurants - ",restaurants);
+      console.log("restaurants - ", restaurants);
 
       setListOfRestaurants(restaurants);
       setFilteredList(restaurants);
@@ -36,18 +38,15 @@ const Body = () => {
       setFilteredList([]);
     }
   };
-  
+
   const isOnline = useOnlineStatus();
   if (!isOnline) {
-    return (
-      <h1>🔴 You are offline! Please check your internet connection.</h1>
-    );
+    return <h1>🔴 You are offline! Please check your internet connection.</h1>;
   }
 
   if (!filteredList) return <Shimmer />; // extra safety (shouldn't happen with fixes above)
   if (filteredList.length === 0 && listOfRestaurants.length === 0)
     return <Shimmer />;
-
 
   return (
     <div className="body">
@@ -68,7 +67,7 @@ const Body = () => {
                 (restaurant) =>
                   restaurant.info.name
                     .toLowerCase()
-                    .includes(searchText.toLowerCase())
+                    .includes(searchText.toLowerCase()),
               );
               if (filteredRestaurants.length === 0) return;
               setFilteredList(filteredRestaurants);
@@ -80,35 +79,44 @@ const Body = () => {
         </div>
 
         <div className="m-4 p-4 flex items-center">
-        <button
-          className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
-          onClick={() => {
-            const filteredList = listOfRestaurants.filter(
-              (restaurant) => restaurant.info.avgRating > 4.5
-            );
-            setFilteredList(filteredList);
-            console.log(filteredList);
-          }}
-        >
-          Top Rated Restaurants
-        </button>
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
+            onClick={() => {
+              const filteredList = listOfRestaurants.filter(
+                (restaurant) => restaurant.info.avgRating > 4.5,
+              );
+              setFilteredList(filteredList);
+              console.log(filteredList);
+            }}
+          >
+            Top Rated Restaurants
+          </button>
         </div>
-        <div  className="m-4 p-4 flex items-center">
-<button
-          className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
-          onClick={() => {
-            fetchData();
-          }}
-        >
-          All Restaurants
-        </button>
+        <div className="m-4 p-4 flex items-center">
+          <button
+            className="px-4 py-2 bg-gray-100 rounded-lg cursor-pointer"
+            onClick={() => {
+              fetchData();
+            }}
+          >
+            All Restaurants
+          </button>
         </div>
-        
       </div>
       <div className="flex flex-wrap justify-left">
         {filteredList.map((restaurant) => (
-          <Link to={`/restaurants/${restaurant?.info?.id}`} key={restaurant?.info?.id}>
-            <RestaurantCard resData={restaurant} />
+          <Link
+            to={`/restaurants/${restaurant?.info?.id}`}
+            key={restaurant?.info?.id}
+          >
+            {
+              /**if the restaurant is promoted then add a promoted label to it */
+              restaurant?.info?.veg ? (
+                <RestaurantCardPromoted resData={restaurant} />
+              ) : (
+                <RestaurantCard resData={restaurant} />
+              )
+            }
           </Link>
         ))}
       </div>
