@@ -1,13 +1,16 @@
 import Shimmer from "../Shimmer";
 import { useParams } from "react-router";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
 
 const RestaurantMenu = () => {
   const { id } = useParams();
 
   const restInfo = useRestaurantMenu(id);
 
-  const info = restInfo?.data.cards[2]?.card?.card?.info;
+  const info = restInfo;
+
+  const categories = info?.categories;
 
   if (!info) return <Shimmer />;
 
@@ -16,19 +19,16 @@ const RestaurantMenu = () => {
   return restInfo === null ? (
     <Shimmer />
   ) : (
-    <div className=" m-4 p-4 w-[250] bg-gray-100 hover:bg-gray-200 rounded-lg">
-      <h1 className="font-bold text-lg">{name}</h1>
-      <p>
+    <div className="text-center">
+      <h1 className="font-bold m-6 text-lg">{name}</h1>
+      <p className="font-bold text-lg">
         {cuisines.join(", ")} - {costForTwo}
       </p>
 
-      <h2 className="font-bold text-md">Menu</h2>
-      <ul className="list-disc pl-5">
-        <li> Pizza</li>
-        <li>Burger</li>
-        <li>Pasta</li>
-        <li>French Fries</li>
-      </ul>
+      {/* categories accordian */}
+      {categories.map((category) => (
+        <RestaurantCategory key={category?.name} data={category} />
+      ))}
     </div>
   );
 };

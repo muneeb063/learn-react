@@ -3,4 +3,5 @@ export const LOGO_URL =
 
 export const CDN_URL = "https://www.cafezouk.com/images/Special%20Dishes/";
 
-export const BASE_API_URL = "https://namastedev.com/api/v1/";
+export const BASE_API_URL =
+  "https://muneeb063.github.io/restaurant-data/restaurants.json";

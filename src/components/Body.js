@@ -20,20 +20,19 @@ const Body = () => {
   const fetchData = async () => {
     try {
       const data = await fetch(
-        `https://corsproxy.io/?${BASE_API_URL}listRestaurants`,
+        "https://muneeb063.github.io/restaurant-data/restaurants.json",
       );
 
       const json = await data.json();
-      console.log("Body - ", json);
+
       const restaurants =
         json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
           ?.restaurants ?? [];
-      console.log("restaurants - ", restaurants);
 
       setListOfRestaurants(restaurants);
       setFilteredList(restaurants);
     } catch (error) {
-      console.error("Fetch failed:", err);
+      console.error("Fetch failed:", error);
       setListOfRestaurants([]);
       setFilteredList([]);
     }
@@ -111,7 +110,7 @@ const Body = () => {
           >
             {
               /**if the restaurant is promoted then add a promoted label to it */
-              restaurant?.info?.veg ? (
+              restaurant?.info?.promoted ? (
                 <RestaurantCardPromoted resData={restaurant} />
               ) : (
                 <RestaurantCard resData={restaurant} />
