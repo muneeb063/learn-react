@@ -1,7 +1,9 @@
-import { useState } from "react";
 import ItemList from "./ItemList";
 
-const RestaurantCategory = (data, showItem) => {
+const RestaurantCategory = ({ data, showItem, setShowIndex }) => {
+  const handleClick = () => {
+    setShowIndex();
+  };
 
   return (
     <div>
@@ -12,11 +14,11 @@ const RestaurantCategory = (data, showItem) => {
           onClick={handleClick}
         >
           <span className="font-bold text-lg">
-            {data?.data?.name} ({data?.data?.items?.length})
+            {data?.name} ({data?.items?.length})
           </span>
           <span>⬇️</span>
         </div>
-        {showItem && <ItemList items={data?.data?.items} />}
+        {showItem && <ItemList items={data?.items} />}
       </div>
       {/* {accordion body} */}
     </div>

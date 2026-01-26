@@ -1,5 +1,5 @@
 // {} this is used to give attributes to the class e.g, {id: "heading", }
-import React, {lazy, Suspense} from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -8,6 +8,7 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
+import UserContext from "./utils/UserContext";
 // import Grocery from "./components/Grocery";
 
 // Code Splitting in React
@@ -18,16 +19,27 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 //On Demand Loading
 //Dynamic Import
 
-const Grocery = lazy (() => import("./components/Grocery"));
+const Grocery = lazy(() => import("./components/Grocery"));
 
 // rootReact.createElement => object => when rendere then it becomes HTMLElement
 
 const AppLayout = () => {
+  const [userName, setUserName] = useState();
+
+  useEffect(() => {
+    const data = {
+      name: "Muneeb",
+    };
+    setUserName(data.name);
+  }, []);
+
   return (
-    <div className="App">
-      <Header />
-      <Outlet />
-    </div>
+    <UserContext.Provider value={{ loggedInUser: userName, setUserName }}>
+      <div className="App">
+        <Header />
+        <Outlet />
+      </div>
+    </UserContext.Provider>
   );
 };
 
@@ -39,7 +51,14 @@ const appRouter = createBrowserRouter([
       { path: "/", element: <Body /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/grocery", element: <Suspense fallback={<h1>Loading...</h1>}><Grocery /></Suspense> },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading...</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
+      },
       { path: "/restaurants/:id", element: <RestaurantMenu /> },
     ],
     errorElement: <Error />,
