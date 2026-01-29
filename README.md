@@ -33,3 +33,17 @@
     - Slice (cartSlice)
     - dispatch(action)
     - Selector
+
+# 4 Types of testing (developer)
+
+    - Unit Testing
+    - Integration Testing
+    - End to End Testing ( e2e )
+
+# Setting up testing in the app
+
+- Install React testing library
+- Install jest
+- Install babel dependencies
+- Configure Babel
+- Configure Parcel Config File to disbale default babel transpilation - Parcel also uses babel so create .parcelrc and add configuration (can be found on parceljs.org link)
