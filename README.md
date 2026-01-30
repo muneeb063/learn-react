@@ -46,4 +46,7 @@
 - Install jest
 - Install babel dependencies
 - Configure Babel
-- Configure Parcel Config File to disbale default babel transpilation - Parcel also uses babel so create .parcelrc and add configuration (can be found on parceljs.org link)
+- Configure Parcel Config File to disbale default babel transpilation - Parcel also uses babel so create .parcelrc  
+   and configuration (can be found on parceljs.org link)
+- Jest Configuration - using npm init jest@latest
+- Install JSDom library
