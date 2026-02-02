@@ -50,3 +50,6 @@
    and configuration (can be found on parceljs.org link)
 - Jest Configuration - using npm init jest@latest
 - Install JSDom library
+- Install @babel/preset-react to enable jsx syntac for test cases
+- Include @babel/preset-react inside babel config which is ["@babel/preset-react", { runtime: "automatic" }]
+- 
