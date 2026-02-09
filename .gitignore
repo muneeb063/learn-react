@@ -1,9 +1,10 @@
 node_modules/
 .parcel-cache/
-
+coverage/
 dist/
 .cache/
 
 # optional caches
 .DS_Store
 .env
+

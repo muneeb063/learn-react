@@ -52,4 +52,4 @@
 - Install JSDom library
 - Install @babel/preset-react to enable jsx syntac for test cases
 - Include @babel/preset-react inside babel config which is ["@babel/preset-react", { runtime: "automatic" }]
-- 
+- npm i -D @testing-library/jest-

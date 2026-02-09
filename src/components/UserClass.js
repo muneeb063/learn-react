@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 
 class UserClass extends React.Component {
   constructor(props) {
@@ -18,8 +19,11 @@ class UserClass extends React.Component {
     // Best place to make API calls
     console.log("Child: UserClass Component Mounted");
 
-    const data = await fetch("https://api.github.com/users/muneeb063");
-    const json = await data.json();
+    // const data = await fetch("https://api.github.com/users/muneeb063");
+    // const json = await data.json();
+
+    const response = await axios.get("https://api.github.com/users/muneeb063");
+    const json = response.data;
 
     this.setState({
       userInfo: json,

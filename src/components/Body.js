@@ -5,6 +5,7 @@ import { BASE_API_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import axios from "axios";
 
 const Body = () => {
   const [listOfRestaurants, setListOfRestaurants] = useState([]);
@@ -20,11 +21,16 @@ const Body = () => {
 
   const fetchData = async () => {
     try {
-      const data = await fetch(
+      // const data = await fetch(
+      //   "https://muneeb063.github.io/restaurant-data/restaurants.json",
+      // );
+
+      // const json = await data.json();
+
+      const response = await axios.get(
         "https://muneeb063.github.io/restaurant-data/restaurants.json",
       );
-
-      const json = await data.json();
+      const json = response.data;
 
       const restaurants =
         json.data.data.cards[1]?.card?.card?.gridElements?.infoWithStyle
