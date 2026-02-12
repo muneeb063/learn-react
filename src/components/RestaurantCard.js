@@ -6,7 +6,10 @@ const RestaurantCard = (props) => {
     resData?.info; //API Data
 
   return (
-    <div className=" m-4 p-4 w-[250] bg-gray-100 hover:bg-gray-200 rounded-lg">
+    <div
+      data-testid="restaurant-card"
+      className=" m-4 p-4 w-[250] bg-gray-100 hover:bg-gray-200 rounded-lg"
+    >
       {/* <img className="res-logo" src={CDN_URL + img} alt="res-logo" /> */}
       <img
         className="rounded-lg"

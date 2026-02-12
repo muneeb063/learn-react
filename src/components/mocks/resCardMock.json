@@ -1,0 +1,61 @@
+{
+  "info": {
+    "id": "456789",
+    "name": "Spice Kingdom",
+    "cloudinaryImageId": "rng/md/carousel/production/indian101",
+    "locality": "Brigade Road",
+    "areaName": "City Center",
+    "costForTwo": "₹500 for two",
+    "cuisines": ["Indian", "North Indian", "Biryani"],
+    "avgRating": 4.2,
+    "avgRatingString": "4.2",
+    "totalRatingsString": "12K+ ratings",
+    "veg": false,
+    "promoted": false,
+    "sla": {
+      "deliveryTime": 35,
+      "lastMileTravel": 4,
+      "slaString": "35 mins"
+    },
+    "aggregatedDiscountInfoV3": {
+      "header": "20% OFF",
+      "subHeader": "UPTO ₹50"
+    },
+    "categories": [
+      {
+        "name": "Recommended",
+        "items": [
+          {
+            "id": "sk_rec_1",
+            "name": "Chicken Biryani",
+            "price": 329,
+            "isVeg": false
+          },
+          {
+            "id": "sk_rec_2",
+            "name": "Paneer Butter Masala",
+            "price": 279,
+            "isVeg": true
+          }
+        ]
+      },
+      {
+        "name": "Best Seller",
+        "items": [
+          {
+            "id": "sk_bs_1",
+            "name": "Butter Chicken",
+            "price": 349,
+            "isVeg": false
+          },
+          {
+            "id": "sk_bs_2",
+            "name": "Garlic Naan (2 pcs)",
+            "price": 89,
+            "isVeg": true
+          }
+        ]
+      }
+    ]
+  }
+}
