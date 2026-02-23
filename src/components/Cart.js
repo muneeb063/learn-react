@@ -12,7 +12,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="text-center m-4 p-4">
+    <div data-testid="cart" className="text-center m-4 p-4">
       <h1 className="font-bold text-2xl">Cart</h1>
       <div className="w-6/12 m-auto">
         <button

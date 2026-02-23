@@ -56,3 +56,4 @@ test("Should render Body component with search", async () => {
 
   expect(cards.length).toBe(1);
 });
+

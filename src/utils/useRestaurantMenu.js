@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { BASE_API_URL } from "../utils/constants";
+import axios from "axios";
 
 const useRestaurantMenu = (id) => {
   const [restInfo, setRestInfo] = useState(null);
